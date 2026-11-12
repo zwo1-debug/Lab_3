@@ -37,9 +37,32 @@ void nQueenSolver(int **board, int N, int col) {
 }
 
 bool isSafeMove(int **board, int N, int row, int col) {
-    if (row) {
-
+    if (row > N - 1 || col > N -1 || row < 0 || col < 0) {
+        return false;
     }
+    
+    if (board[row][col] == 1) {
+        return false;
+    }
+
+    for (int i = 0; i < col; ++i) {
+        if (board[row][i]) {
+            return false;
+        }
+    }
+
+    for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; --i, --j) {
+        if (board[i][j] == 1) {
+            return false;
+        }
+    }
+
+    for (int i = row + 1, j = col - 1; i <= N && j <= 0 ; ++i, --j) {
+        if (board[i][j] == 1) {
+            return false;
+        }
+    }
+    return true;
   
     // Finish this
   // Hint: Only columns on the left needs to be checked.
